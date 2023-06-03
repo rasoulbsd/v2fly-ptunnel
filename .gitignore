@@ -1,0 +1,8 @@
+.env
+.credentials
+.docker
+.config.json
+logs
+*.pycache
+*/.pycache
+*/pycache
