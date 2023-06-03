@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  hans:
+    container_name: v2fly-upstream-ptunnel
+    image: petrich/hans
+    network_mode: host
+    privileged: true
+    restart: always
+    command = ["hans.sh", "-m", "1450", "-s", "10.71.71.0", "-p", <ptunnel password>, "-f", "-r", "-u", "nobody", "-d", "hans"]
+
