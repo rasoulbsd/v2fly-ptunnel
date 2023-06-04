@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  v2ray:
+    image: ghcr.io/getimages/v2fly-core:v4.45.2
+    restart: always
+    environment:
+      - v2ray.vmess.aead.forced=false
+    ports:
+      - "127.0.0.1:1010:1010"
+      - "127.0.0.1:1010:1010/udp"
+      - "127.0.0.1:1110:1110"
+      - "1210:1210"
+      - "1210:1210/udp"
+      - "1310:1310"
+    volumes:
+      - ./v2ray/config/:/etc/v2ray/
+      - ./logs:/var/log/v2ray/

@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  hans:
+    image: petrich/hans
+    container_name: v2fly-bridge-ptunnel
+    restart: always
+    network_mode: host
+    privileged: true
+    stdin_open: true
+    tty: true
+    command: ["hans.sh", "-u", "nobody", "-d", "hans", "-v", "-f", "-c", "95.216.149.99", "-p", "ssvs*s9djdsNFKSJFsdkd#lLSDNdsfsj2", "-qi", "-m", "1450"]

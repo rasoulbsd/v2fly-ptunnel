@@ -6,3 +6,4 @@ logs
 *.pycache
 */.pycache
 */pycache
+credentials.json

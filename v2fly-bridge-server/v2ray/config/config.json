@@ -1,0 +1,101 @@
+{
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 1010,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      }
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 1110,
+      "protocol": "http",
+      "settings": {}
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 1210,
+      "protocol": "shadowsocks",
+      "settings": {
+        "password": "<SHADOWSOCKS-PASSWORD>",
+        "method": "aes-128-gcm",
+        "level": 0,
+        "network": "tcp,udp"
+      }
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 1310,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "<BRIDGE-UUID>",
+            "alterId": 0,
+            "security": "aes-128-gcm"
+          }
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "proxy",
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "10.71.71.1",
+            "port": 1310,
+            "users": [
+              {
+                "id": "<UPSTREAM-UUID>",
+                "alterId": 0,
+                "security": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws"
+      },
+      "mux": {
+        "enabled": true
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "freedom"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
+      "localhost"
+    ]
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "settings": {
+      "rules": [
+        {
+          "type": "field",
+          "outboundTag": "freedom",
+          "domain": [
+            "regexp:.*\\.ir$"
+          ]
+        }
+      ]
+    }
+  }
+}
