@@ -1,5 +1,5 @@
 .env
-.credentials.json
+*/credentials.json
 .docker
 .config.json
 logs
